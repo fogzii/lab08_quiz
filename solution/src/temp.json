@@ -1,0 +1,21 @@
+ {
+  "quizTitle": "What the hell",
+  "quizSynopsis": "potato",
+  "questions": [
+    {
+      "question": "Helloworld?",
+      "questionType": "text",
+      "answers": [
+        "potato",
+        "amongus",
+        "happy progress day",
+        "hehehe potato"
+      ],
+      "correctAnswer": "2",
+      "messageForCorrectAnswer": "Good job",
+      "messageForInorrectAnswer": "Bad Job",
+      "explanation": "Stupidity",
+      "point": "1"
+    }
+  ]
+} 

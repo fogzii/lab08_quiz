@@ -1,0 +1,6 @@
+{
+    "coverage": true,
+    "lint": true,
+    "server": true,
+    "coverage_factor": 0.3
+}

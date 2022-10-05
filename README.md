@@ -4,7 +4,7 @@
 
 ## Due Date
 
-Week 9 Monday 5:00 pm AEST
+Week 9 Monday 5:00 pm [Sydney Local Time](https://www.timeanddate.com/worldclock/australia/sydney)
 
 ## Background
 

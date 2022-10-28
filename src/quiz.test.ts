@@ -11,7 +11,7 @@ test('Remove this test and uncomment the tests below', () => {
   expect(1 + 1).toStrictEqual(2);
 });
  
- /*
+/*
  
 import request, { HttpVerb } from 'sync-request';
 import { port, url } from './config.json';
@@ -96,8 +96,8 @@ function questionRemove(questionId: number) {
 
 // ========================================================================= //
 
-beforeEach(() => clear());
-afterAll(() => clear());
+beforeEach(clear);
+afterAll(clear);
 
 describe('/', () => {
   test('success', () => {
@@ -372,9 +372,6 @@ describe('/question/add', () => {
     describe.each([
       'single', 'multiple'
     ])('Common answers error, type %s', (questionType) => {
-      beforeEach(() => {
-        clear();
-      });
       test.each(commonAnswerErrors)('invalid answers: $testName', ({ answers }) => {
         const quiz = quizCreate('q', 'q');
         expect(questionAdd(quiz.quizId, '?', questionType, answers)).toEqual(400);
@@ -453,33 +450,33 @@ describe('/question/edit', () => {
     test('wrong id', () => {
       const quiz = quizCreate('q', 'q');
       const question = questionAdd(quiz.quizId, 'valid', 'single', [validTrueAnswer]);
-      expect(questionEdit(question.quizId + 1, '?', 'single', [validTrueAnswer])).toEqual(400);
+      expect(questionEdit(question.questionId + 1, '?', 'single', [validTrueAnswer])).toEqual(400);
     });
 
     test('empty question string', () => {
       const quiz = quizCreate('q', 'q');
       const question = questionAdd(quiz.quizId, 'valid', 'single', [validTrueAnswer]);
-      expect(questionEdit(question.quizId, '', 'single', [validTrueAnswer])).toEqual(400);
+      expect(questionEdit(question.questionId, '', 'single', [validTrueAnswer])).toEqual(400);
     });
 
     test('invalid question type', () => {
       const quiz = quizCreate('q', 'q');
       const question = questionAdd(quiz.quizId, 'valid', 'single', [validTrueAnswer]);
-      expect(questionEdit(question.quizId, '?', 'sing', [validTrueAnswer])).toEqual(400);
+      expect(questionEdit(question.questionId, '?', 'sing', [validTrueAnswer])).toEqual(400);
     });
 
     describe.each(['single', 'multiple'])('Common answers error, type %s', (questionType) => {
       test.each(commonAnswerErrors)('invalid answers: $testName', ({ answers }) => {
         const quiz = quizCreate('q', 'q');
         const question = questionAdd(quiz.quizId, 'valid', 'single', [validTrueAnswer]);
-        expect(questionEdit(question.quizId, '?', questionType, answers)).toEqual(400);
+        expect(questionEdit(question.questionId, '?', questionType, answers)).toEqual(400);
       });
     });
 
     test('type single, more than one correct answer', () => {
       const quiz = quizCreate('q', 'q');
       const question = questionAdd(quiz.quizId, 'valid', 'single', [validTrueAnswer]);
-      expect(questionEdit(question.quizId, '?', 'single', [validTrueAnswer, validTrueAnswer])).toEqual(400);
+      expect(questionEdit(question.questionId, '?', 'single', [validTrueAnswer, validTrueAnswer])).toEqual(400);
     });
   });
 

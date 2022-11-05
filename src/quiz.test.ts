@@ -7,12 +7,6 @@
  * specification
  */
  
-test('Remove this test and uncomment the tests below', () => {
-  expect(1 + 1).toStrictEqual(2);
-});
- 
-/*
- 
 import request, { HttpVerb } from 'sync-request';
 import { port, url } from './config.json';
 
@@ -646,5 +640,3 @@ describe('/question/remove', () => {
     });
   });
 });
-
-*/

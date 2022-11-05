@@ -6,7 +6,7 @@
  * implementation to achieve 100% coverage while still adhering to the
  * specification
  */
- 
+
 import request, { HttpVerb } from 'sync-request';
 import { port, url } from './config.json';
 

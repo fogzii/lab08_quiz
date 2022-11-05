@@ -11,6 +11,10 @@ import { port, url } from './config.json';
 // COMP1531 middleware - must use AFTER declaring your routes
 import errorHandler from 'middleware-http-errors';
 
+import { quizCreate, quizDetails, quizEdit, quizRemove, quizzesList } from './quiz';
+import { questionAdd, questionEdit, questionRemove } from './question';
+import { clear } from './clear';
+
 const PORT: number = parseInt(process.env.PORT || port);
 
 const app = express();
@@ -45,13 +49,46 @@ app.get('/echo/echo', (req: Request, res: Response) => {
 app.post('/quiz/create', (req: Request, res: Response) => {
   // For PUT/POST requests, data is transfered through the JSON body
   const { quizTitle, quizSynopsis } = req.body;
-
-  // TODO: Implement
-  console.log('Do something with:', quizTitle, quizSynopsis);
-  res.json({ quizId: -999999 });
+  res.json(quizCreate(quizTitle, quizSynopsis));
 });
 
-// TODO: Remaining routes
+app.get('/quiz/details', (req: Request, res: Response) => {
+  const quizId = parseInt(req.query.quizId as string);
+  res.json(quizDetails(quizId));
+});
+
+app.put('/quiz/edit', (req: Request, res: Response) => {
+  const { quizId, quizTitle, quizSynopsis } = req.body;
+  res.json(quizEdit(quizId, quizTitle, quizSynopsis));
+});
+
+app.delete('/quiz/remove', (req: Request, res: Response) => {
+  const quizId = parseInt(req.query.quizId as string);
+  res.json(quizRemove(quizId));
+});
+
+app.get('/quizzes/list', (req: Request, res: Response) => {
+  res.json(quizzesList());
+});
+
+app.post('/question/add', (req: Request, res: Response) => {
+  const { quizId, questionString, questionType, answers } = req.body;
+  res.json(questionAdd(quizId, questionString, questionType, answers));
+});
+
+app.put('/question/edit', (req: Request, res: Response) => {
+  const { questionId, questionString, questionType, answers } = req.body;
+  res.json(questionEdit(questionId, questionString, questionType, answers));
+});
+
+app.delete('/question/remove', (req: Request, res: Response) => {
+  const questionId = parseInt(req.query.questionId as string);
+  res.json(questionRemove(questionId));
+});
+
+app.delete('/clear', (req: Request, res: Response) => {
+  res.json(clear());
+});
 
 // COMP1531 middleware - must use AFTER declaring your routes
 app.use(errorHandler());
